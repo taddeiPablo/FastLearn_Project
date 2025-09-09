@@ -1,20 +1,37 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from './lib/supabaseClient';
 
 import NavBar from './components/Navbar';
 
-
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      /*if(!session){
+        navigate("/");
+      }*/
+     event === 'SIGNED_OUT' && navigate("/login");
+     event === 'SIGNED_IN' && navigate("/dashboard");  
+     console.log(event, session);
+    });
+  }, [navigate]);
+
   return (
     <div className="App">
       <NavBar />
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<Signup/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
     </div>

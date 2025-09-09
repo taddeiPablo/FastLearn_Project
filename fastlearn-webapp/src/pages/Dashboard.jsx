@@ -32,7 +32,7 @@ function Dashboard() {
                             <a href="#" className="block py-2 px-4 rounded hover:bg-blue-50 text-blue-700 font-medium">Mis cursos</a>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 px-4 rounded hover:bg-blue-50 text-blue-700 font-medium">Cerrar sesión</a>
+                            <a href="/" className="block py-2 px-4 rounded hover:bg-blue-50 text-blue-700 font-medium">Cerrar sesión</a>
                         </li>
                     </ul>
                 </nav>
