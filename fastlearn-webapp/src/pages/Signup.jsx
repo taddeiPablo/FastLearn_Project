@@ -7,25 +7,18 @@ function Signup() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [session, setSession] = useState(null);
+    const [session_signup, setSession_signup] = useState(null);
     
     useEffect(() => {
-        //const session = supabase.auth.session();
-        //const { data: { session } } = await supabase.auth.getSession();
-        const getSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            setSession(session);
-        };
-        getSession();
-        
-        if(session?.user){
+        if(session_signup?.user){
             const timer = setTimeout(() => {
                 navigate("/login");
-            }, 1000);
+            }, 2000);   
             return () => clearTimeout(timer);
+        }else{
+            navigate("/signup");
         }
-        
-    }, [navigate, session?.user]);
+    }, [navigate, session_signup?.user]);
 
     const handlerSubmit = async (e) => {
         e.preventDefault();
@@ -37,15 +30,15 @@ function Signup() {
                 alert("Email y contraseña son obligatorios");
                 return;
             }
-
+            // registro de nuevo usuario
             let { data, error } = await supabase.auth.signUp({
                 email: cleanEmail,
                 password: cleanPassword,
             });
-
+            // si hubo algun error en el proceso de signup se captura el error y se muestra en un alert
             if (error) throw error;
-            console.log(data);
-            alert("SE REGISTRO CORRECTAMENTE, EN BREVE SERAS REDIRIGIDO AL LOGIN");
+            setSession_signup(data);
+            alert("SE REGISTRO CORRECTAMENTE, REVISE SU EMAIL PARA VERIFICAR LA CUENTA");
         } catch (error) {
             alert(error);
         }

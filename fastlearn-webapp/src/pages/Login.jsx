@@ -9,7 +9,6 @@ function Login(){
     const [session, setSession] = useState(null);  
     
     useEffect(() => {
-        //const session = supabase.auth.session();
         const getSession = async () => {
             const { data: { session } } = await supabase.auth.getSession();
             setSession(session);
@@ -30,11 +29,10 @@ function Login(){
                 email: email,
                 password: password,
             });
-
+            // aqui tengo el access token para trabajar despues
+            console.log("DATA:");
+            console.log(data);
             if (error) throw error;
-            console.log(data);  
-            
-            alert("LOGIN CORRECTO, REDIRIGIENDO AL DASHBOARD");
         } catch (error) {
             alert(error);
         }

@@ -1,8 +1,12 @@
-
-
+/*import { useNavigate } from 'react-router-dom';*/
+import { useState, useEffect } from "react";
+import { supabase } from '../lib/supabaseClient';
+import { SideBar } from '../components/Sidebar';
 
 function Dashboard() {
+
     // Datos ficticios de usuario
+    // aqui proceder a llamar a los datos del profile del usuario logueado
     const user = {
         name: "Juan Pérez",
         email: "juan.perez@email.com",
@@ -11,33 +15,7 @@ function Dashboard() {
 
     return (
         <div className="min-h-screen bg-gray-100 flex">
-            {/* Sidebar */}
-            <aside className="w-64 bg-white shadow-lg flex flex-col items-center py-8 px-4">
-                <img
-                    src={user.avatar}
-                    alt="Avatar usuario"
-                    className="w-24 h-24 rounded-full mb-4 border-4 border-blue-200"
-                />
-                <h2 className="text-lg font-bold text-gray-800 mb-1">{user.name}</h2>
-                <p className="text-sm text-gray-500 mb-6">{user.email}</p>
-                <nav className="w-full">
-                    <ul className="space-y-2">
-                        <li>
-                            <a href="#" className="block py-2 px-4 rounded hover:bg-blue-50 text-blue-700 font-medium">Editar perfil</a>
-                        </li>
-                        <li>
-                            <a href="#" className="block py-2 px-4 rounded hover:bg-blue-50 text-blue-700 font-medium">Crear curso nuevo</a>
-                        </li>
-                        <li>
-                            <a href="#" className="block py-2 px-4 rounded hover:bg-blue-50 text-blue-700 font-medium">Mis cursos</a>
-                        </li>
-                        <li>
-                            <a href="/" className="block py-2 px-4 rounded hover:bg-blue-50 text-blue-700 font-medium">Cerrar sesión</a>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
-
+            <SideBar user={user} />
             {/* Contenido principal */}
             <main className="flex-1 p-6">
                 <div className="max-w-6xl mx-auto">
