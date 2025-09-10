@@ -17,19 +17,15 @@ function Login(){
         getSession();
         
         if (session?.user) {
-            navigate("/dashboard"); // aca deberia redirigir hacia el login si no esta logueado
+            navigate("/dashboard"); 
         }else{
-            navigate("/login");
+            navigate("/login"); // aca deberia redirigir hacia el login si no esta logueado
         }
     }, [navigate,  session?.user]);
 
     const handlerSubmit = async (e) => {
         e.preventDefault();
         try {
-            /*await supabase.auth.signIn({
-                email,
-                password,
-            });*/
             let { data, error } = await supabase.auth.signInWithPassword({
                 email: email,
                 password: password,
@@ -39,7 +35,6 @@ function Login(){
             console.log(data);  
             
             alert("LOGIN CORRECTO, REDIRIGIENDO AL DASHBOARD");
-            //navigate("/dashboard");
         } catch (error) {
             alert(error);
         }
@@ -49,6 +44,7 @@ function Login(){
         <>
             <div className="flex items-center justify-center h-screen">
                 <div className="w-full max-w-xs">
+                    <h5 className="text-gray-700 text-sm font-bold mb-2 text-center">Ingresar</h5>
                     <form onSubmit={handlerSubmit}
                         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                         <div className="mb-4">

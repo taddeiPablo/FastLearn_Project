@@ -6,7 +6,7 @@ import { supabase } from './lib/supabaseClient';
 
 import NavBar from './components/Navbar';
 
-import Home from './pages/Home';
+import Home from './pages/home/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
@@ -16,9 +16,6 @@ function App() {
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
-      /*if(!session){
-        navigate("/");
-      }*/
      event === 'SIGNED_OUT' && navigate("/login");
      event === 'SIGNED_IN' && navigate("/dashboard");  
      console.log(event, session);

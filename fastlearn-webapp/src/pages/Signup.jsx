@@ -18,10 +18,13 @@ function Signup() {
         };
         getSession();
         
-        const timer = setTimeout(() => {
-            navigate("/login");
-        }, 1000);
-        return () => clearTimeout(timer);
+        if(session?.user){
+            const timer = setTimeout(() => {
+                navigate("/login");
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+        
     }, [navigate, session?.user]);
 
     const handlerSubmit = async (e) => {
@@ -51,6 +54,7 @@ function Signup() {
         <>
             <div className="flex items-center justify-center h-screen">
                 <div className="w-full max-w-xs">
+                    <h5 className="text-gray-700 text-sm font-bold mb-2 text-center">Registrarse</h5>
                     <form onSubmit={handlerSubmit}
                         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                         <div className="mb-4">
