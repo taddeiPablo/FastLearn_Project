@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from './lib/supabaseClient';
+import { FastContextProvider } from './context/FastContext';
 
 import NavBar from './components/Navbar';
 
@@ -25,12 +26,14 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<Signup/>} />
-        <Route path="/dashboard" element={<Dashboard/>} />
-      </Routes>
+      <FastContextProvider>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/signup" element={<Signup/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
+        </Routes>
+      </FastContextProvider>
     </div>
   );
 }
